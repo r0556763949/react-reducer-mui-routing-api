@@ -1,6 +1,4 @@
 import User from "../models/User";
-import axios from "axios";
-import { useEffect, useState } from "react";
 // const initialState: User = { password: 1, firstName: "malka", LastName: "bruk", adress: "@", phone: 1, email: "v" };
 const initialState:User = { id:-1,password: "", firstName: "", lastName: "", address: "", phone: "", email: "" };
 

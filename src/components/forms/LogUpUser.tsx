@@ -1,13 +1,10 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import User from '../models/User';
 import { useContext, useState } from 'react';
-import { UserContext } from './UserContext';
-import { Numbers } from '@mui/icons-material';
+import { UserContext } from '../UserContext';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import ShowUser from './ShowUser'
+import ShowUser from '../ShowUser'
 import axios from 'axios';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
@@ -16,14 +13,14 @@ const LogUpUser = () => {
     if (!context) {
         throw new Error('YourComponent must be used within a UserProvider');
     }
-    const { state, dispatch } = context;
+    const { dispatch } = context;
     const [fName, setfName] = useState('');
     const [password, setPassword] = useState('');
     const [lName, setlName] = useState('');
     const [adress, setAdress] = useState('');
     const [phon, setPhon] = useState('');
     const [email, setEmail] = useState('');
-    const [successlogup ,setsuccesslogup] = useState(false)
+    const [successlogup, setsuccesslogup] = useState(false)
     const [errorMessage, setErrorMessage] = useState('');
     const send = async () => {
         if (!email || !password) {
@@ -33,14 +30,14 @@ const LogUpUser = () => {
                 const response = await axios.post('http://localhost:3000/api/auth/register', {
                     email: email,
                     password: password,
-                    address: adress, 
-                    phone: phon,  
-                    lastName: lName, 
+                    address: adress,
+                    phone: phon,
+                    lastName: lName,
                     firstName: fName
                 });
-                    dispatch({ type: 'CREATE_USER' ,payload: response.data.newUser })
-                    setsuccesslogup(true)
-                    setErrorMessage('');
+                dispatch({ type: 'CREATE_USER', payload: response.data.newUser })
+                setsuccesslogup(true)
+                setErrorMessage('');
             } catch (e: any) {
                 if (e.response) {
                     setErrorMessage(e.response.data.message || "שגיאה בשרת");
@@ -55,7 +52,7 @@ const LogUpUser = () => {
         // dispatch({ type: 'CREATE_USER' })
     }
     return (<>
-        {!successlogup&&<Box
+        {!successlogup && <Box
             component="form"
             sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
             noValidate
@@ -115,14 +112,14 @@ const LogUpUser = () => {
             <div>
                 <p>{errorMessage}</p>
                 <Button variant="contained" endIcon={<AutorenewIcon />} onClick={() => {
-                        setErrorMessage('');
-                    }}>
-                   try again
+                    setErrorMessage('');
+                }}>
+                    try again
                 </Button>
             </div>
         )}
-        {successlogup&&<ShowUser/>}
-        </>
+        {successlogup && <ShowUser />}
+    </>
     );
 }
 export default LogUpUser;

@@ -1,9 +1,7 @@
 import { Box } from '@mui/material';
-import User from '../models/User'
-import LogUp from './LogUp';
-import Login from './Login';
+import LogUp from './bottons/LogUp';
+import Login from './bottons/Login';
 import { useState } from 'react';
-import { DeleteForever } from '@mui/icons-material';
 
 function UserUser() {
     const [activeForm, setActiveForm] = useState(null);

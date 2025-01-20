@@ -16,10 +16,10 @@ const NavBar = () => {
                     |
                     <Link to='/about'>About</Link>
                 </nav>
-                </Box>
-            </>
-            )
+            </Box>
+        </>
+    )
 
 }
 
-            export default NavBar
+export default NavBar

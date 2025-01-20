@@ -1,10 +1,6 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import UpdateUser from './UpdateUser'
-import LoginUser from './LoginUser'
-import SendIcon from '@mui/icons-material/Send';
-import ShowUser from './ShowUser';
+import LoginUser from '../forms/LoginUser'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
@@ -16,10 +12,10 @@ const Login = ({ setActiveForm, activeForm }: { setActiveForm: Function, activeF
   };
   return (
     <>
-        {!openLogin && <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={handleLoginClick}>
-          login
-        </Button>}
-        {openLogin && activeForm === 'login' && <LoginUser />} {/* הוספת תנאי כדי להציג את LoginUser רק אם activeForm הוא 'login' */}
+      {!openLogin && <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={handleLoginClick}>
+        login
+      </Button>}
+      {openLogin && activeForm === 'login' && <LoginUser />} {/* הוספת תנאי כדי להציג את LoginUser רק אם activeForm הוא 'login' */}
     </>
   );
 }

@@ -1,13 +1,10 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import User from '../models/User';
 import { useContext, useState } from 'react';
-import { UserContext } from './UserContext';
-import { Numbers } from '@mui/icons-material';
+import { UserContext } from '../UserContext';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import ShowUser from './ShowUser'
+import ShowUser from '../ShowUser'
 import axios from 'axios';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
@@ -16,12 +13,12 @@ const LoginUser = () => {
     if (!context) {
         throw new Error('YourComponent must be used within a UserProvider');
     }
-    const { state, dispatch } = context;
+    const { dispatch } = context;
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
     const [successlogin, setsuccesslogin] = useState(false)
     const [errorMessage, setErrorMessage] = useState('');
-    
+
     const send = async () => {
         if (!email || !password) {
             setErrorMessage("אנא מלא את כל השדות!");
@@ -33,7 +30,7 @@ const LoginUser = () => {
                 });
 
                 if (response.data) {
-                    dispatch({ type: 'CREATE_USER',payload: response.data.user })
+                    dispatch({ type: 'CREATE_USER', payload: response.data.user })
                     setsuccesslogin(true)
                     setErrorMessage('');
                 }
@@ -79,10 +76,10 @@ const LoginUser = () => {
             <div>
                 <p>{errorMessage}</p>
                 <Button variant="contained" endIcon={<AutorenewIcon />} onClick={() => {
-                        setErrorMessage('');
-                        setemail(''); 
-                        setPassword(''); 
-                    }}>
+                    setErrorMessage('');
+                    setemail('');
+                    setPassword('');
+                }}>
                     try again
                 </Button>
             </div>

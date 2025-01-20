@@ -1,48 +1,45 @@
 
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import User from '../models/User';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from './UserContext';
-import { Numbers } from '@mui/icons-material';
+import { useContext, useState } from 'react';
+import { UserContext } from '../UserContext';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 
-const UpdateUser = ({ onClose }:{onClose:any}) => {
+const UpdateUser = ({ onClose }: { onClose: any }) => {
     const context = useContext(UserContext);
     if (!context) {
         throw new Error('YourComponent must be used within a UserProvider');
     }
     const { state, dispatch } = context;
     const [fName, setfName] = useState(state.firstName);
-    const [password, setPassword] = useState(state.password);
+    // const [password, setPassword] = useState(state.password);
     const [lName, setlName] = useState(state.lastName);
     const [adress, setAdress] = useState(state.address);
     const [phon, setPhon] = useState(state.phone);
     const [email, setEmail] = useState(state.email);
-    const [edition ,setEdition] = useState(true)
+    const [edition, setEdition] = useState(true)
     const [errorMessage, setErrorMessage] = useState('');
 
-    const send = async() => {
+    const send = async () => {
         try {
             const response = await axios.put('http://localhost:3000/api/auth/', {
                 email: email,
-                address: adress, 
-                phone: phon,  
-                lastName: lName, 
+                address: adress,
+                phone: phon,
+                lastName: lName,
                 firstName: fName
             }, {
                 headers: {
                     'user-id': state.id // הוסף את ה-userId כאן
                 }
             });
-                dispatch({ type: 'UPDATE_USER' ,payload: response.data })
-                setEdition(false)
-                setErrorMessage('');
+            dispatch({ type: 'UPDATE_USER', payload: response.data })
+            setEdition(false)
+            setErrorMessage('');
         } catch (e: any) {
             if (e.response) {
                 setErrorMessage(e.response.data.message || "שגיאה בשרת");
@@ -54,7 +51,7 @@ const UpdateUser = ({ onClose }:{onClose:any}) => {
         onClose();
     }
     return (<>
-        {edition&&<Box
+        {edition && <Box
             component="form"
             sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
             noValidate
@@ -118,14 +115,14 @@ const UpdateUser = ({ onClose }:{onClose:any}) => {
         {errorMessage && (
             <div>
                 <p>{errorMessage}</p>
-                <Button variant="contained"  endIcon={<AutorenewIcon />} onClick={() => {
-                        setErrorMessage('');
-                    }}>
+                <Button variant="contained" endIcon={<AutorenewIcon />} onClick={() => {
+                    setErrorMessage('');
+                }}>
                     try again
                 </Button>
             </div>
         )}
-        </>
+    </>
     );
 }
 export default UpdateUser;

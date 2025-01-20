@@ -1,13 +1,10 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { UserProvider } from './UserContext'
 import { UserContext } from './UserContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 const Profile = () => {
   const context = useContext(UserContext);
-  const userName = context?.state.firstName + " " + context?.state.LastName
+  const userName = context?.state.firstName + " " + context?.state.lastName
   function stringToColor(string: string) {
     let hash = 0;
     let i;

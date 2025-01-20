@@ -1,13 +1,11 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import HomeIcon from '@mui/material/Icon'
-import { UserProvider } from './UserContext'
 import { UserContext } from './UserContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import ArticleIcon from '@mui/icons-material/Article';
 
 
-const MoreDetails = ({ setActiveForm, activeForm }: { setActiveForm: Function, activeForm: any }) => {
+const MoreDetails = ({ setActiveForm }: { setActiveForm: Function, activeForm: any }) => {
     const context = useContext(UserContext);
     const currentUser = context?.state
     const [openMore, setopenMore] = useState(true)
